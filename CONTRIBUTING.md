@@ -1,16 +1,12 @@
-Edit this before making a repository public!
-
-[Edited from this brilliant template, which contains source material used to construst this template!](https://github.com/nayafia/contributing-template/blob/master/CONTRIBUTING-template.md)
-
 # Introduction
 
-> First off, thank you for considering contributing to <TOOL_NAME_HERE>. It's people like you that make <TOOL_NAME_HERE> such a great tool.
+> First off, thank you for considering contributing to mr-tea. It's people like you that make mr-tea such a great tool.
 
 > Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open source project. In return, they should reciprocate that respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
 
 ### What to Contribute
 
-> <TOOL_NAME_HERE> is an open source project and we love to receive contributions from our community — you! There are many ways to contribute, from writing tutorials or blog posts, improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into Elasticsearch itself.
+> mr-tea is an open source project and we love to receive contributions from our community — you! There are many ways to contribute, from writing tutorials or blog posts, improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into Elasticsearch itself.
 
 # Ground Rules
 
@@ -38,7 +34,7 @@ Edit this before making a repository public!
 
 # How to report a bug
 
-> If you find a security vulnerability, do NOT open an issue. Email XXXX instead.
+> If you find a security vulnerability, do NOT open an issue. Email datasciencecampus@gmail.com instead.
 
 > When filing an issue, make sure to answer the questions in the Bug template.
 

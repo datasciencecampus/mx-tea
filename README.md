@@ -1,12 +1,16 @@
-# skeletor-public
+# mr-tea
 
-A template for public repositories. 
+![](meta/mrtea.gif)
 
-## Steps
 
-1. First decide whether the LICENSE should be Open Government Licence (OGL) Version 3 (default) or MIT
-2. Edit the CONTRIBUTING.md file
-3. Review each file before adding to this repository; ensure no usernames, machine names etc are included
-4. Review all comments
-5. Review TODOs
-6. Create a Release
+Mr Tea is a [Slack Bot](https://api.slack.com/bot-users) who asks a simple question to a Slack channel...
+
+![](meta/question.png)
+> Source: Data Science Campus
+
+Keen tea enthusiasts then give the post a thumbs up if they want to participate. We then use the list of people who gave a thumbs up to create groups for the tea break.
+
+![](meta/group.png)
+> Source: Data Science Campus
+
+The scripts (`ask-question.py` and `post-group.py`) to do this are found here in `/scripts`. Visit [our blog post](https://datasciencecampus.github.io/creating-tea-breaks-on-slack/) to find out more information.
