@@ -20,3 +20,5 @@ models/*.vec
 data/*
 .mypy*
 output/*
+
+test/*

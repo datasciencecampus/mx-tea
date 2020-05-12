@@ -29,14 +29,9 @@ slack_bot_id = 'slack_bot_id'
 """ Question message """
 slack_question_message = "Morning all, give this post a thumbs up if you are available for a tea break this afternoon!"
 
-""" Group size """
+""" Requested group size (note, the algorithm may use +1 if ir provides a better split of people """
 group_size = 4
 
-
-def get_users():
-	""" Gets a list of users from your Slack organisation and returns as a JSON object """
-	url = f"https://slack.com/api/users.list?token={slack_token}"
-	return requests.get(url).json()
 
 
 def get_posts():
@@ -65,35 +60,26 @@ def get_attendees_ids(poll):
 	return attendees_ids[0]
 
 
-def get_attendees_names(attendees_ids, users):
-	""" Gets a list of attendees slack names """
-	attendees_names = []
-	for attendees_id in attendees_ids:
-		for user in users['members']:
-			if user.get('id') == attendees_id:
-				attendees_names.append(user.get('real_name'))
-	return attendees_names
-
-
 def allocate(names):
 	""" Allocates names to groups """
 	rnd.shuffle(names)
 
-	if len(names) < group_size + 1:
-		groupsize = len(names)
-	else:
-		groupsize = group_size
-
-	N_GROUPS = math.ceil(len(names) / groupsize)
 	result = []
 
-	for _ in range(N_GROUPS):
-		if len(names) < groupsize:
-			for i in range(len(names)):
-				result[i].append(names[i])
-		else:
+	# increase groupsize by one if the groups are more evenly split by doing so
+	groupsize = group_size if abs(((len(names) / group_size) % 1) - 0.5) >= abs(((len(names) / (group_size + 1)) % 1) - 0.5) else group_size + 1
+
+	# increase groupsize if we don't have enough meeting links
+	groupsize = max(groupsize, math.ceil(len(names) / len(meeting_links)))
+
+	while True:
+		# Make sure no group has less than two people
+		if len(names) > groupsize + 2:
 			result.append(names[0:groupsize])
 			names = names[groupsize:]
+		else:
+			result.append(names[0:])
+			break
 
 	return result
 
@@ -109,7 +95,7 @@ def present(groups, meeting_links):
 		msg.append(meeting_links[num])
 		msg.append("--------------------------------------------------------------------------------")
 		for member in group:
-			msg.append(member)
+			msg.append(f"<@{member}>")
 		num = num + 1
 
 	return '\n'.join(map(str, msg))
@@ -125,14 +111,12 @@ def post_to_slack(msg):
 
 def process(event, context):
 	""" Pipeline process required for Cloud Function """
-	users = get_users()
 	posts = get_posts()
 	poll = get_recent_question(posts)
 	attendees_ids = get_attendees_ids(poll)
-	attendees_names = get_attendees_names(attendees_ids, users)
-	groups = allocate(attendees_names)
+	groups = allocate(attendees_ids)
 	msg = present(groups, meeting_links)
 	post_to_slack(msg)
 
 
-### process()
+##process()
