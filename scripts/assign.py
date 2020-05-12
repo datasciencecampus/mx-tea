@@ -60,8 +60,8 @@ def get_attendees_ids(poll):
 	return attendees_ids[0]
 
 
-def allocate(names):
-	""" Allocates names to groups """
+def allocate(ids):
+	""" Allocates ids to groups """
 	rnd.shuffle(names)
 
 	result = []
