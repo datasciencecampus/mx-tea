@@ -62,23 +62,23 @@ def get_attendees_ids(poll):
 
 def allocate(ids):
 	""" Allocates ids to groups """
-	rnd.shuffle(names)
+	rnd.shuffle(ids)
 
 	result = []
 
 	# increase groupsize by one if the groups are more evenly split by doing so
-	groupsize = group_size if abs(((len(names) / group_size) % 1) - 0.5) >= abs(((len(names) / (group_size + 1)) % 1) - 0.5) else group_size + 1
+	groupsize = group_size if abs(((len(ids) / group_size) % 1) - 0.5) >= abs(((len(ids) / (group_size + 1)) % 1) - 0.5) else group_size + 1
 
 	# increase groupsize if we don't have enough meeting links
-	groupsize = max(groupsize, math.ceil(len(names) / len(meeting_links)))
+	groupsize = max(groupsize, math.ceil(len(ids) / len(meeting_links)))
 
 	while True:
 		# Make sure no group has less than two people
-		if len(names) > groupsize + 2:
-			result.append(names[0:groupsize])
-			names = names[groupsize:]
+		if len(ids) > groupsize + 2:
+			result.append(ids[0:groupsize])
+			ids = ids[groupsize:]
 		else:
-			result.append(names[0:])
+			result.append(ids[0:])
 			break
 
 	return result
