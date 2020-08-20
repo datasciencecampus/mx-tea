@@ -55,7 +55,7 @@ def get_attendees_ids(poll):
 	attendees_ids = []
 	reactions = poll.get('reactions')
 	for reaction in reactions:
-		if reaction.get('name') == "+1":
+		if "+1" in reaction.get('name'):
 			attendees_ids.append(reaction.get('users'))
 	return attendees_ids[0]
 
