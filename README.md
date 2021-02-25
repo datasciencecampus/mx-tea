@@ -1,9 +1,9 @@
-# mr-tea
+# mx-tea
 
-![](meta/mrtea.gif)
+![](meta/mxtea.gif)
 
 
-Mr Tea is a [Slack Bot](https://api.slack.com/bot-users) who asks a simple question to a Slack channel...
+Mx Tea is a [Slack Bot](https://api.slack.com/bot-users) who asks a simple question to a Slack channel...
 
 ![](meta/question.png)
 > Source: Data Science Campus
