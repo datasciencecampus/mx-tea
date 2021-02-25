@@ -4,8 +4,6 @@ import random as rnd
 import math
 import json
 
-
-
 """ Post your meeting links below """
 meeting_links = \
 	[
@@ -33,10 +31,9 @@ slack_question_message = "Morning all, give this post a thumbs up if you are ava
 group_size = 4
 
 
-
 def get_posts():
 	""" Gets posts from the channel by the bot and returns as JSON object """
-	url = f"https://slack.com/api/channels.history?token={slack_token}&channel={slack_channel_id}&bot_id={slack_bot_id}"
+	url = f"https://slack.com/api/conversations.history?token={slack_token}&channel={slack_channel_id}&bot_id={slack_bot_id}"
 	return requests.get(url).json()
 
 
@@ -67,7 +64,8 @@ def allocate(ids):
 	result = []
 
 	# increase groupsize by one if the groups are more evenly split by doing so
-	groupsize = group_size if abs(((len(ids) / group_size) % 1) - 0.5) >= abs(((len(ids) / (group_size + 1)) % 1) - 0.5) else group_size + 1
+	groupsize = group_size if abs(((len(ids) / group_size) % 1) - 0.5) >= abs(
+		((len(ids) / (group_size + 1)) % 1) - 0.5) else group_size + 1
 
 	# increase groupsize if we don't have enough meeting links
 	groupsize = max(groupsize, math.ceil(len(ids) / len(meeting_links)))
@@ -117,6 +115,5 @@ def process(event, context):
 	groups = allocate(attendees_ids)
 	msg = present(groups, meeting_links)
 	post_to_slack(msg)
-
 
 ##process()
